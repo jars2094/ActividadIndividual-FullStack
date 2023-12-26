@@ -1,0 +1,29 @@
+footer{
+    background-color: var(--color-azul);
+    border-top: 5px solid var(--color-rojo);
+    height: auto;
+    padding-bottom: 20px;
+  }
+
+  .contentInfo label{
+    color: var(--color-blanco);
+    margin: 5px 0px;
+    font-size: 13px;
+  }
+
+  .contentInfo label.contentInfo--Titulo {
+      font-size: 20px;
+  }
+
+  .contenidoRS span{
+    margin: 0px 8px;
+  }
+
+  .contenidoRS label{
+    color: var(--color-blanco);
+    margin-bottom: 10px;
+  }
+
+  .contenidoRS label.contenidoRS--Titulo {
+    font-size: 20px;
+}

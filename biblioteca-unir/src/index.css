@@ -1,0 +1,140 @@
+/* Definición de variables de color */
+:root {
+  --color-azul: #16223f; /* Azul Oscuro */
+  --color-azul-claro: #3f51b5; /* Azul Claro */
+  --color-rojo: #d92525; /* Rojo Oscuro */
+  --color-blanco: #fff; /* Azul Oscuro */
+  --color-negro: #3e3e3e; /* Negro Oscuro */
+  --color-verde: #146606; /* Negro Verde */
+  --color-gris: #efefef; /* Gris */
+  --color-gris-osc: #8d8d8d; /* Gris Oscuro*/
+}
+
+
+@font-face {
+  font-family: LexendDeca;
+  src: url(../public/font/LexendDeca-VariableFont_wght.ttf);
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-blanco);
+  font-family: LexendDeca !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a{
+  cursor: pointer;
+  text-decoration: none !important;
+  color: var(--color-azul) !important;
+}
+
+.center-items{
+  display: flex;
+  justify-content: center;
+}
+
+.text-justify {
+  text-align: justify !important;
+}
+
+/*#region Home*/
+
+/*#region Estilos Paneles Home */
+
+.panel1{
+  background-color: var(--color-gris);
+  width: 100%;
+}
+
+/*#endregion*/
+
+/*#endregion*/
+
+/*#region Acerca*/
+
+.acercaView__panel1__parrafo p{
+  text-align: justify;
+}
+
+.acercaView__panel2{
+  background-color: var(--color-azul);
+}
+
+.acercaView__panel2 #tituloH3 h3{
+  color: var(--color-blanco);
+}
+
+.acercaView__panel2 #tituloH3 hr{
+  border: 1px solid var(--color-gris) !important;  
+  opacity: 0.2 !important;
+}
+
+.acercaView__panel2__parrafo p{
+  text-align: justify;
+  color: var(--color-blanco);
+}
+
+.itemCirculo {
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%; 
+  background-color: var(--color-azul-claro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-blanco); 
+  font-size: 24px; 
+}
+
+.cardStyle{
+  background-color: var(--color-gris);
+  margin: 10px;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.cardStyle p{
+  text-align: justify;
+  padding: 0px 20px;
+}
+
+/*#endregion*/
+
+/*#region servicio alquiler*/
+
+.imgInfo{
+  height: 390px;
+  box-shadow: -1px 9px 6px 3px rgba(0,0,0,0.2);
+}
+
+.infoBook{
+  border: 1px solid var(--color-gris-osc);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.tituloLibro{
+  font-size: 28px;
+  font-weight: 700;
+  padding-bottom: 15px;
+}
+
+.infoBook__Texto span{
+  font-size: 18px;
+}
+
+ span.vistasLibro{
+  font-size: 20px;
+}
+
+/*#endregion*/
+
+/*#region Acerca*/
+/*#endregion*/

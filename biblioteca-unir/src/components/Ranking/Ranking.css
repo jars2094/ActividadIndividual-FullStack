@@ -1,0 +1,39 @@
+.containerRanking{
+    height: auto;
+    background-color: var(--color-gris);
+    border-radius: 20px;
+    margin: 20px 5px;
+    padding: 20px;
+}
+
+.containerRanking__Imagen{
+    height: 261px;
+    width: auto;
+}
+
+.containerRanking__Imagen:hover{
+    box-shadow: -3px 3px 11px 0px rgb(0 0 0 / 56%);
+}
+
+.containerRanking__Titulo{
+    color: var(--color-azul);
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.containerRanking__Contenido label{
+    font-size: 15px;
+}
+
+.containerRanking__Contenido p{
+    padding-top: 10px;
+    margin: 0px;
+    font-size: 12px;
+    text-align: justify;
+}
+@media (max-width: 1300px){
+    .col-md-7 {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}

@@ -1,0 +1,11 @@
+.inputCustom{
+    border: 1px solid var(--color-gris-osc);
+    border-radius: 15px;
+}
+
+.inputCustom__Size{
+    width: 100%;
+    outline: none;
+    border: 0px solid;
+    height: 50px;
+}

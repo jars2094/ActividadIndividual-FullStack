@@ -1,0 +1,11 @@
+.cardInfo{
+    height: auto;
+    padding: 20px;
+    text-align: center;
+    align-self: center;
+}
+
+.cardInfo p{
+    color: var(--color-negro);
+    text-align: justify;
+}

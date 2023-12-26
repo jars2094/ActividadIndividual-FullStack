@@ -1,0 +1,51 @@
+li{
+    list-style: none;
+}
+
+.containerDynamicList{
+    /* height: 717px; */
+    padding: 0px;
+}
+
+.bookFront{
+    height: 150px;
+}
+
+.containerDynamicList__item{
+    text-align: start;
+    border: 1px solid var(--color-gris-osc);
+    border-radius: 20px;
+    padding: 20px 0px;
+    /* max-height: 236.6px; */
+}
+
+.containerDynamicList__item .libros__titulo{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.containerDynamicList__item .libros__autor{
+    font-size: 14px;
+    color: var(--color-gris-osc);
+}
+
+.containerDynamicList__item .libros__descripcion{
+    padding-top: 8px;
+    text-align: justify;
+}
+
+.disponible{
+    color: var(--color-verde);
+}
+
+.enPrestamo{
+    color: var(--color-rojo);
+}
+
+#pagination{
+    margin-bottom: 20px;
+}
+
+#pagination button{
+    margin: 0px 10px;
+}

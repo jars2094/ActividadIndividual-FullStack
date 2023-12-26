@@ -1,0 +1,7 @@
+.tituloStyle{
+    color: var(--color-azul);
+    font-weight: 700;
+}
+#tituloH3 hr{
+    opacity: 0.5 !important;
+}
