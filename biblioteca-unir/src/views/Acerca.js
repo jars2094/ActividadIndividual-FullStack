@@ -6,7 +6,7 @@ const Acerca = () => {
     <div id='acercaView'>
 
       <div className='row m-0 center-items acercaView__panel1'>
-        <div className='col-md-9 p-0 mt-5 mb-4 acercaView__panel1__parrafo'>
+        <div className='col-md-9 p-4 acercaView__panel1__parrafo'>
           <p>La <strong>Biblioteca Oriental</strong> representa un enclave cultural donde la pasión por la literatura y el conocimiento se entrelazan. No es simplemente un espacio dedicado a los libros, sino un lugar que despierta la curiosidad y alimenta la mente de quienes se sumergen en su vasta colección. Desde obras clásicas hasta ejemplares contemporáneos, abarca un extenso espectro de géneros, cada uno como una ventana que invita a explorar mundos desconocidos.</p>
           <p>Más allá de ser un repositorio de libros, es un oasis para los amantes de la lectura que buscan expandir sus horizontes intelectuales. La biblioteca ofrece una experiencia integral; no solo es un refugio tranquilo, sino también un espacio social y cultural. Aquí se dan cita eventos, charlas, debates y clubes de lectura, creando una atmósfera vibrante y unida por la pasión compartida por el conocimiento.</p>
           <p>En su compromiso por adaptarse a los cambios modernos, la Biblioteca Oriental ha evolucionado hacia una plataforma híbrida. A través de su presencia virtual, los lectores pueden acceder a su rica colección desde cualquier lugar, fusionando la tradición bibliotecaria con la comodidad y accesibilidad de la era digital. Esta convergencia entre lo tangible y lo virtual ofrece una experiencia de lectura más dinámica y versátil.</p>
