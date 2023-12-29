@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FontIcon from '../components/FontIcon/FontIcon';
-import { chevronRight, eye } from '../components/FontIcon/iconConfig';
+import { chevronRight, eye} from '../components/FontIcon/iconConfig';
 import { Link } from 'react-router-dom';
 import DropDownList from '../components/DropDownList/DropDownList';
 import Titulo from '../components/Titulo/Titulo';
@@ -12,7 +12,12 @@ import ModalNotification from '../components/ModalNotification/ModalNotification
 function ServicioAlquiler() {
 
 //#region Variable
-
+var model ={
+    diasRenta: 0,
+    tipoEntrega: '',
+    fechaAlquiler: new Date(),
+    fechaEntrega: null
+}
 //#endregion
 
 //#region Generación de listas
@@ -35,7 +40,7 @@ const listRentalTime = [
 //#region Hook useState && useEffect
 
 const [selectedBook, setSelectedBook] = useState(null); //objLibro
-const [selectedAddress, setSelectedAddress] = useState(''); //string
+const [selectedDelivery, setSelectedDelivery] = useState(''); //string
 const [hideAddress, setHideAddress] = useState(true); //bool
 const [selectedRentalTime , setSelectedRentalTime] = useState(0); //decimal
 
@@ -46,7 +51,8 @@ const [selectedRentalTime , setSelectedRentalTime] = useState(0); //decimal
 
     const ChangeDelivery = (event) => { //Mostrar/Ocultar el campo dirrección
         const selectedValue = event.target.value;
-        setSelectedAddress(selectedValue);
+        setSelectedDelivery(selectedValue);
+        model.tipoEntrega= selectedDelivery;
 
         if (selectedValue === 'ED') {
             setHideAddress(false);
@@ -58,6 +64,7 @@ const [selectedRentalTime , setSelectedRentalTime] = useState(0); //decimal
     const ChangeRentalTime = (event) => { 
         const selectedValue = event.target.value;
         setSelectedRentalTime(selectedValue);
+        model.diasRenta = selectedRentalTime;
     };
 
 //#endregion
@@ -67,22 +74,15 @@ const { showModalNotification, notificationTitle, notificationMessage, show, hid
 
     const MakeRental = () => {
 
-        let fecha = new Date();
-        let cantidad = parseFloat(selectedRentalTime);
-
-        // Sumar 5 días
-        
         const opcionesFecha = {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
         };
-        let fechaFormateada = fecha.toLocaleDateString('es-ES', opcionesFecha);
-        
-        console.log(fechaFormateada);
-        //   fechaFormateada.setDate(fechaFormateada.getDate() + cantidad);
 
-        show('¡Alquiler Exitoso!', 'El alquiler se realizo de forma exitosa '+fechaFormateada+'.');
+        model.fechaEntrega = model.fechaAlquiler.toLocaleDateString('es-ES', opcionesFecha);
+        
+        show('¡Alquiler Exitoso!', 'El alquiler se realizo de forma exitosa, recuerde que debe devolver el libro el: <strong>' + model.fechaEntrega + '</strong>.');
     };
 
     const closedNotificacion = () => {
