@@ -82,7 +82,7 @@ const { showModalNotification, notificationTitle, notificationMessage, show, hid
 
         model.fechaEntrega = model.fechaAlquiler.toLocaleDateString('es-ES', opcionesFecha);
         
-        show('¡Alquiler Exitoso!', 'El alquiler se realizo de forma exitosa, recuerde que debe devolver el libro el: <strong>' + model.fechaEntrega + '</strong>.');
+        show('¡Alquiler Exitoso!', 'El alquiler se realizo de forma exitosa, recuerde que debe devolver el libro el:  ' + model.fechaEntrega + '.');
     };
 
     const closedNotificacion = () => {
