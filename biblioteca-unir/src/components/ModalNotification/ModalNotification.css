@@ -26,3 +26,7 @@
     cursor: pointer;
     top: 10px;
   }
+  
+  .notification-modal__close:hover {
+    color: var(--color-azul-claro);
+  }

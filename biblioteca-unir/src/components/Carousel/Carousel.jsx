@@ -26,7 +26,6 @@ class CarouselComponent extends React.Component {
           <div className="carousel-item">
             <img src={Banner3} className="d-block w-100" alt="Slide 3" />
           </div>
-          {/* Agrega aquí más elementos carousel-item con tus imágenes */}
         </div>
         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
           <span className="carousel-control-prev-icon" aria-hidden="true"></span>

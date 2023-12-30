@@ -8,7 +8,7 @@ import Button from '../components/Button/Button';
 import Input from '../components/Input/Input';
 import useModalNotification from '../hook/useModalNotification/useModalNotification';
 import ModalNotification from '../components/ModalNotification/ModalNotification';
-
+import { opcionesFecha } from '../general.js';
 function ServicioAlquiler() {
 
 //#region Variable
@@ -16,7 +16,7 @@ var model ={
     diasRenta: 0,
     tipoEntrega: '',
     fechaAlquiler: new Date(),
-    fechaEntrega: null
+    fechaEntrega: new Date()
 }
 //#endregion
 
@@ -43,6 +43,12 @@ const [selectedBook, setSelectedBook] = useState(null); //objLibro
 const [selectedDelivery, setSelectedDelivery] = useState(''); //string
 const [hideAddress, setHideAddress] = useState(true); //bool
 const [selectedRentalTime , setSelectedRentalTime] = useState(0); //decimal
+const [objRental, setObjRental] = useState({
+    diasRenta: 0,
+    tipoEntrega: '',
+    fechaAlquiler: new Date(),
+    fechaEntrega: new Date()
+  });
 
     useEffect(() => { //Cargar la información del libro seleccionado
         const storedBook = JSON.parse(localStorage.getItem('objLibro'));
@@ -52,7 +58,7 @@ const [selectedRentalTime , setSelectedRentalTime] = useState(0); //decimal
     const ChangeDelivery = (event) => { //Mostrar/Ocultar el campo dirrección
         const selectedValue = event.target.value;
         setSelectedDelivery(selectedValue);
-        model.tipoEntrega= selectedDelivery;
+        setObjRental (x => ({...x,tipoEntrega: selectedValue}));
 
         if (selectedValue === 'ED') {
             setHideAddress(false);
@@ -62,9 +68,9 @@ const [selectedRentalTime , setSelectedRentalTime] = useState(0); //decimal
     };
 
     const ChangeRentalTime = (event) => { 
-        const selectedValue = event.target.value;
+        const selectedValue = parseInt(event.target.value, 10);
         setSelectedRentalTime(selectedValue);
-        model.diasRenta = selectedRentalTime;
+        setObjRental (x => ({...x,diasRenta: selectedValue}));
     };
 
 //#endregion
@@ -73,16 +79,21 @@ const [selectedRentalTime , setSelectedRentalTime] = useState(0); //decimal
 const { showModalNotification, notificationTitle, notificationMessage, show, hide } = useModalNotification();
 
     const MakeRental = () => {
+console.log(objRental.diasRenta );
+    if(objRental.diasRenta !== 0 && objRental.tipoEntrega !== ""){
+        let fechaEntrega = new Date(model.fechaAlquiler);
+        fechaEntrega.setDate(fechaEntrega.getDate() + objRental.diasRenta); 
 
-        const opcionesFecha = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        };
+        let fechaFormateada = fechaEntrega.toLocaleDateString('es-ES', opcionesFecha);
+        console.log(fechaFormateada);
 
-        model.fechaEntrega = model.fechaAlquiler.toLocaleDateString('es-ES', opcionesFecha);
+        model.fechaEntrega = fechaFormateada;
+
+        show('¡Alquiler Exitoso!', 'El alquiler se realizo de forma exitosa, recuerde que debe devolver el libro el:  ' + model.fechaEntrega + '. ¡Gracias por fomentar la lectura!');
+    }else{
+        show('¡Advertencia!', 'Debe seleccionar los datos de alquiler');
+    }
         
-        show('¡Alquiler Exitoso!', 'El alquiler se realizo de forma exitosa, recuerde que debe devolver el libro el:  ' + model.fechaEntrega + '.');
     };
 
     const closedNotificacion = () => {
