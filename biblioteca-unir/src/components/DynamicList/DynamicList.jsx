@@ -64,10 +64,15 @@ const DynamicList = () => {
                   <label className='libros__titulo'>{item.qualification}</label>
                 </div>
                 <div className='col-md-12'>
-                  <label className='libros__autor'>{item.author.name}</label>
+                  <label className='libros__autor'>{item.author.name + " " + item.author.lastName + " (Editorial: " + item.editorial.name + ")"}</label>
                 </div>
                 <div className='col-md-12'>
                   <p className='libros__descripcion'>{item.synopsis}</p>
+                </div>
+                <div className='col-md-auto col-sm-12'>
+                  <span>{item.numberLike} <FontIcon icon={heartIcon} color="var(--color-rojo)" /> </span>
+                  <span>{item.viewNumber} <FontIcon icon={eye} color="var(--colo-azul)" /> | </span>
+                  <label>{item.numberPage} Pág. | {item.loanBook === "Disponible" ? <span className='disponible'>{item.estado} <FontIcon icon={circleCheck} color="var(--colo-verde)" /> </span> : <span className='enPrestamo'>{item.loanBook} <FontIcon icon={circleXmark} color="var(--colo-rojo)" />  </span>}</label>
                 </div>
               </div>
             </div>
