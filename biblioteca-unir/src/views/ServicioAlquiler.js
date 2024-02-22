@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import FontIcon from '../components/FontIcon/FontIcon';
-import { chevronRight, eye} from '../components/FontIcon/iconConfig';
+import { chevronRight, eye, book} from '../components/FontIcon/iconConfig';
 import { Link } from 'react-router-dom';
 import DropDownList from '../components/DropDownList/DropDownList';
 import Titulo from '../components/Titulo/Titulo';
 import Button from '../components/Button/Button';
 import Input from '../components/Input/Input';
+import bookDefault from '../img/books/LibroDefault.jpg';
 import useModalNotification from '../hook/useModalNotification/useModalNotification';
 import ModalNotification from '../components/ModalNotification/ModalNotification';
 import { opcionesFecha } from '../general.js';
@@ -52,6 +53,7 @@ const [objRental, setObjRental] = useState({
 
     useEffect(() => { //Cargar la información del libro seleccionado
         const storedBook = JSON.parse(localStorage.getItem('objLibro'));
+        console.log(storedBook);
         setSelectedBook(storedBook);
     }, []);
 
@@ -125,28 +127,28 @@ return (
                     <div className='col-md-10 mb-4'>
                         <div className='row center-items'>
                             <div className='col-md-4 center-items align-items-start'>
-                                <img className='imgInfo' src={selectedBook.ruta} alt='portada-libro' />
+                                <img className='imgInfo' src={bookDefault} alt='portada-libro' />
                             </div>
                             <div className='col-md-8'>
                                 <div className='row infoBook'>
                                     <div className='col-md-12'>
                                         <div className='row'>
                                             <div className='col-md-8'>
-                                                <label className='tituloLibro'>{selectedBook.titulo}</label>
+                                                <label className='tituloLibro'>{"(" + selectedBook.code + ") " + selectedBook.qualification}</label>
                                             </div>
                                             <div className='col-md-4 d-flex justify-content-end'>
                                                 <div className='col-md-auto col-sm-12 d-flex justify-content-end'>
-                                                    <span className='vistasLibro'>{selectedBook.cantVistas} <FontIcon icon={eye} color="var(--colo-azul)" /></span>
+                                                    <span className='vistasLibro'>{selectedBook.viewNumber} <FontIcon icon={eye} color="colorIcon" /> | {selectedBook.amount} <FontIcon icon={book} color="colorIcon"/> </span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className='row m-0 infoBook__Texto'>
-                                        <span><strong>Autor: </strong>{selectedBook.autor} </span>
-                                        <span><strong>Editorial: </strong>{selectedBook.editorial}</span>
-                                        <span><strong>ISBN: </strong>{selectedBook.isbn} </span>
-                                        <span><strong>Año de publicación: </strong>{selectedBook.anio}</span>
-                                        <span className='mt-3 text-justify'><strong>Sinopsis: </strong>{selectedBook.description}</span>
+                                        <span><strong>Autor: </strong>{selectedBook.author.name + " " + selectedBook.author.lastName} </span>
+                                        <span><strong>Editorial: </strong>{selectedBook.editorial.name}</span>
+                                        {/* <span><strong>ISBN: </strong>{selectedBook.isbn} </span> */}
+                                        <span><strong>Año de publicación: </strong>{new Date(selectedBook.publicationYear).getFullYear()}</span>
+                                        <span className='mt-3 text-justify'><strong>Sinopsis: </strong>{selectedBook.synopsis}</span>
                                     </div>
                                 </div>
                                 <div className='row m-0'>
