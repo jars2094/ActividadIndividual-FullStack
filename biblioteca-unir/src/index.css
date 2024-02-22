@@ -44,6 +44,22 @@ a{
   text-align: justify !important;
 }
 
+/*#region Colores*/
+
+.colorIcon{
+  color: var(--colo-azul);
+}
+
+.colorIcon--True{
+  color: var(--colo-verde);
+}
+
+.colorIcon--False{
+  color: #d92525;
+}
+
+/*#endregion*/
+
 /*#region Home*/
 
 /*#region Estilos Paneles Home */
