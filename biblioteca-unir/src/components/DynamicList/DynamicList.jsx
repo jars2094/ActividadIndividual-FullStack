@@ -14,6 +14,7 @@ const DynamicList = () => {
   const [totalPages, setTotalPages] = useState(0); //decimal
 
   useEffect(() => {
+
     fetch("http://localhost:8762/microservice-search/book/GetAll")
       .then((response) => {
         if (!response.ok) {
@@ -39,7 +40,9 @@ const DynamicList = () => {
 
   const indexOfFirstItem = (currentPage - 1) * itemsPerPage;
   const indexOfLastItem = indexOfFirstItem + itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  let currentItems = [];
+
+  currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   const almacenarData = (obj) => {
     localStorage.setItem('objLibro', JSON.stringify(obj));
