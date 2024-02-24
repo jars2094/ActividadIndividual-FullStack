@@ -31,8 +31,7 @@ const SearchBar = () => {
         throw new Error('Network response was not ok');
       }
   
-      const searchData = await response.json();
-      console.log('Search data:', searchData);
+      const data = await response.json();
   
   
     } catch (error) {
