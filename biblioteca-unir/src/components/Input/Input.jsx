@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Input/Input.css'
 
-function Input(obj,onChange) {
+function Input(obj) {
   return (
     <div>
         <div className='row m-0 pt-2'>
@@ -10,7 +10,7 @@ function Input(obj,onChange) {
             </div>
 
             <div className='col-md-12 items-center inputCustom mb-3'>
-                <input className='inputCustom__Size' onChange={onChange}/>
+                <input className='inputCustom__Size'/>
             </div>            
         </div>
     </div>
