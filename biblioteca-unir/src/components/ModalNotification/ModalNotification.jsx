@@ -14,11 +14,7 @@ const ModalNotification = ({notificationTitle, notificationMessage, hideModal, c
           <div className='text-center'>
             <Titulo valorTitulo={notificationTitle}/>
           </div>
-          {closedModal ? (
             <span id='cerrarNotificatio' className="notification-modal__close" onClick={hideModal} ><FontIcon icon={xmarkCircl} color="colorIcon" /></span>
-          ): (
-            <Link to={"/alquiler"}><span id='cerrarNotificatio' className="notification-modal__close" onClick={hideModal} ><FontIcon icon={xmarkCircl} color="colorIcon" /></span></Link>
-          )}
           <p>{notificationMessage}</p>
         </div>
       </div>

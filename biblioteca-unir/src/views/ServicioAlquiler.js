@@ -62,9 +62,11 @@ const [selectedBook, setSelectedBook] = useState(null); //objLibro
 const [selectedDelivery, setSelectedDelivery] = useState(''); //string
 const [hideAddress, setHideAddress] = useState(true); //bool
 const [selectedRentalTime , setSelectedRentalTime] = useState(0); //decimal
+const [inputValue, setInputValue] = useState('');
 const [objRental, setObjRental] = useState({
     diasRenta: 0,
     tipoEntrega: '',
+    direccionEntrega: '',
     fechaAlquiler: new Date(),
     fechaEntrega: new Date()
   });
@@ -77,12 +79,14 @@ const [objRental, setObjRental] = useState({
     }, []);
 
     const ChangeDelivery = (event) => { //Mostrar/Ocultar el campo dirrección
+        
         const selectedValue = event.target.value;
         setSelectedDelivery(selectedValue);
-        setObjRental (x => ({...x,tipoEntrega: selectedValue}));
+        // setObjRental (x => ({...x,tipoEntrega: selectedValue}));
         ChangeComponent(event);
 
-        if (selectedValue === 'ED') {
+
+        if (selectedValue === '2') {
             setHideAddress(false);
         } else {
             setHideAddress(true);
@@ -91,8 +95,14 @@ const [objRental, setObjRental] = useState({
 
     const ChangeRentalTime = (event) => { 
         const selectedValue = parseInt(event.target.value, 10);
-        setSelectedRentalTime(selectedValue);
         setObjRental (x => ({...x,diasRenta: selectedValue}));
+        ChangeComponent(event);
+    };
+
+    
+    const ChangeAdress = (event) => { 
+        const selectedValue = event.target.value;
+        setInputValue(selectedValue);
         ChangeComponent(event);
     };
 
@@ -111,7 +121,7 @@ const [modelData, setModelData] = useState({
     const MakeRental = async (event) => {
         event.preventDefault();
         try {
-            if (objRental.diasRenta !== 0 && objRental.tipoEntrega !== "") {
+            if (objRental.diasRenta !== 0 && objRental.tipoEntrega !== 0) {
 
                 const response = await fetch('http://localhost:8762/microservice-operational/loan/Create', {
                     method: 'POST',
@@ -127,36 +137,40 @@ const [modelData, setModelData] = useState({
                 }
 
                 const responseData = await response.json();
-                console.log(responseData);
 
                 const fechaEntrega = new Date(responseData.deadline);
                 const options = { month: 'long', day: '2-digit', year: 'numeric' };
                 const fechaFormateada = new Intl.DateTimeFormat('es-ES', options).format(fechaEntrega);
+                const bookId = selectedBook.id;
+                const amount = selectedBook.amount - 1;
+                const loanBook = amount === 0 ? "En Prestamo" : "Disponible";
 
-                const bookId = responseData.book;
-                const amount = 20;
-                const loanBook = "Disponible";
+                //#region Actualización de cantidad de libros
+                
+                fetch('http://localhost:8762/microservice-search/book/Update/AmountBook', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: bookId,
+                        amount: amount,
+                        loanBook: loanBook
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        show('¡Alquiler Exitoso!', 'El alquiler se realizo de forma exitosa, recuerde que debe devolver el libro el:  ' + fechaFormateada + '. ¡Gracias por fomentar la lectura!');
+                    } else {
+                        console.error('Error al actualizar:', response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al actualizar:', error);
+                });
 
-                console.log(book + " " + amount +" " + loanBook);
-
-                // const putResponse = await fetch("http://localhost:8762/microservice-operational/loan/Update/AmountBook", {
-                //     method: 'PUT',
-                //     headers: {
-                //       'Content-Type': 'application/json',
-                //       'bookId': bookId,
-                //       'amount': amount,
-                //       'loanBook': loanBook 
-                //     }
-                //   });
-              
-                //   if (!putResponse.ok) {
-                //     throw new Error('Network response was not ok');
-                //   }
-              
-                //   console.log('PUT request successful');
-
-                show('¡Alquiler Exitoso!', 'El alquiler se realizo de forma exitosa, recuerde que debe devolver el libro el:  ' + fechaFormateada + '. ¡Gracias por fomentar la lectura!');
-
+                //#endregion
+                
             } else {
                 show('¡Advertencia!', 'Debe seleccionar los datos de alquiler');
             }
@@ -171,15 +185,20 @@ const ChangeComponent = (event) => {
     setModelData({ ...modelData, [name]: value });
   };
 
-const closedNotificacion = () => {
-    hide();
+const closedNotificacion = (data) => {
+    if(data === "¡Alquiler Exitoso!"){
+        hide();
+        window.location.href = '/alquiler';
+    }else{        
+        hide();
+    }
 };
 //#endregion
 
 return (
     <div>
         {showModalNotification && (
-            <ModalNotification notificationTitle={notificationTitle} notificationMessage={notificationMessage} hideModal={closedNotificacion} />
+            <ModalNotification notificationTitle={notificationTitle} notificationMessage={notificationMessage} hideModal={() => closedNotificacion(notificationTitle)} />
         )}
         {selectedBook ? (
            <form onSubmit={MakeRental}>
@@ -222,9 +241,9 @@ return (
                                         <div className='row m-0 infoBook__Texto'>
                                             <span><strong>Autor: </strong>{selectedBook.author.name + " " + selectedBook.author.lastName} </span>
                                             <span><strong>Editorial: </strong>{selectedBook.editorial.name}</span>
-                                            {/* <span><strong>ISBN: </strong>{selectedBook.isbn} </span> */}
                                             <span><strong>Año de publicación: </strong>{new Date(selectedBook.publicationYear).getFullYear()}</span>
                                             <span className='mt-3 text-justify'><strong>Sinopsis: </strong>{selectedBook.synopsis}</span>
+                                            {/* <span><strong>ISBN: </strong>{selectedBook.isbn} </span> */}
                                         </div>
                                     </div>
                                     <div className='row m-0'>
