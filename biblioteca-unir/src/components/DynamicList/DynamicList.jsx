@@ -15,7 +15,7 @@ const DynamicList = ({ lstBook }) => {
   useEffect(() => {
     if (lstBook.length > 0) {
       setTotalPages(Math.ceil(lstBook.length / itemsPerPage));
-      // setCurrentPage(1);
+      setCurrentPage(1);
     }  
   }, [lstBook]);
 
